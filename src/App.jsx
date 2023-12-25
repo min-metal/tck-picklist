@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 function SolarForm() {
-  const [picklist, setPicklist] = useState({});
+const [picklist, setPicklist] = useState({});
 
   const {
     register,
@@ -25,11 +25,11 @@ function SolarForm() {
       numberOfSkipPlugs: 0,
       isTesla: false,
 
-      numberOf25mmConduits: 0,
-      numberOf32mmConduits: 0,
-      numberOfTileDektites: 0,
-      numberOfMetalDektites: 0,
-      numberOfAluminiumSquareDuct: 0,
+      n25mmConduits: 0,
+      n32mmConduits: 0,
+      tileDektites: 0,
+      metalDektites: 0,
+      aluminiumSquareDuct: 0,
     },
   });
 
@@ -42,6 +42,32 @@ function SolarForm() {
   const KLIPLOK_FEET_SPACING = 500;
   const TRAPEZOIDAL_FEET_SPACING = 500;
   const EXTRA_FEET_LEEWAY = 6;
+
+  const ITEMS_MAP = [
+    {key: "tileFeet", title: "Tile Feet"},
+    {key: "corrugatedFeet", title: "Corrugated Feet"},
+    {key: "kliplokFeet", title: "Kliplok Feet"},
+    {key: "trapezoidalFeet", title: "Trapezoidal Feet"},
+    {key: "proRails", title: "Pro Rails"},
+    {key: "tiltRails", title: "Tilt Rails"},
+    {key: "screws", title: "Screws"},
+    {key: "joiners", title: "Joiners"},
+    {key: "earthStuff", title: "Earth Stuff"},
+    {key: "numberOfPanels", title: "Panels"},
+    {key: "midsAndEnds", title: "Mids and Ends"},
+    {key: "midsAndEndsOld", title: "Mids and Ends (Old)"},
+    {key: "qCables", title: "Q-Cables"},
+    {key: "isolatorsNormalType", title: "Isolators"},
+    {key: "isolatorsClearTypeType", title: "Enclosures"},
+    {key: "qRelay", title: "Q-Relay"},
+    {key: "c32AmpBreaker", title: "C32 Breakers"},
+    {key: "envoy", title: "Envoy"},
+    {key: "n25mmConduits", title: "25mm Conduits"},
+    {key: "n32mmConduits", title: "32mm Conduits"},
+    {key: "tileDektites", title: "Tile Dektites"},
+    {key: "metalDektites", title: "Metal Dektites"},
+    {key: "aluminiumSquareDuct", title: "Aluminium Square Duct and Covers"},
+  ]
 
   const onSubmit = handleSubmit((data) => {
     console.log(data);
@@ -57,11 +83,11 @@ function SolarForm() {
       numberOfStrings,
       numberOfSkipPlugs,
       isTesla,
-      numberOf25mmConduits,
-      numberOf32mmConduits,
-      numberOfTileDektites,
-      numberOfMetalDektites,
-      numberOfAluminiumSquareDuct,
+      n25mmConduits,
+      n32mmConduits,
+      tileDektites,
+      metalDektites,
+      aluminiumSquareDuct,
     } = data;
 
     const numberOfPanels = panelsProRailParallel + panelsProRailLandscape + panelsTiltRailParallel + panelsTiltRailLandscape;
@@ -89,12 +115,12 @@ function SolarForm() {
       isolatorsClearTypeType: !isTesla ? numberOfStrings : 0,
       qRelay: !isTesla ? numberOfStrings : 0,
       c32AmpBreaker: !isTesla ? numberOfStrings : 0,
-      envoy: true,
-      numberOf25mmConduits,
-      numberOf32mmConduits,
-      numberOfTileDektites,
-      numberOfMetalDektites,
-      numberOfAluminiumSquareDuct,
+      envoy: 1,
+      n25mmConduits,
+      n32mmConduits,
+      tileDektites,
+      metalDektites,
+      aluminiumSquareDuct,
     }
     setPicklist(picklist);
     console.log(picklist);
@@ -323,13 +349,13 @@ function SolarForm() {
 
       <h4 className="col-12 mt-2">Sundries</h4>
       <div className="col-sm-6">
-        <label htmlFor="numberOf25mmConduitsInput">25mm conduits:</label>
+        <label htmlFor="n25mmConduitsInput">25mm conduits:</label>
         <input
           className="form-control"
           type="number"
-          id="numberOf25mmConduitsInput"
-          name="numberOf25mmConduits"
-          {...register("numberOf25mmConduits", {
+          id="n25mmConduitsInput"
+          name="n25mmConduits"
+          {...register("n25mmConduits", {
             required: {
               value: true,
               message: "required",
@@ -338,17 +364,17 @@ function SolarForm() {
             min: 0
           })}
         />
-        {errors.numberOf25mmConduits?.type === "required" && <span>Number required</span>}
-        {errors.numberOf25mmConduits?.type === "min" && <span>Must be 0 or greater</span>}
+        {errors.n25mmConduits?.type === "required" && <span>Number required</span>}
+        {errors.n25mmConduits?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
       <div className="col-sm-6">
-        <label htmlFor="numberOf32mmConduitsInput">32mm conduits:</label>
+        <label htmlFor="n32mmConduitsInput">32mm conduits:</label>
         <input
           className="form-control"
           type="number"
-          id="numberOf32mmConduitsInput"
-          name="numberOf32mmConduits"
-          {...register("numberOf32mmConduits", {
+          id="n32mmConduitsInput"
+          name="n32mmConduits"
+          {...register("n32mmConduits", {
             required: {
               value: true,
               message: "required",
@@ -357,18 +383,18 @@ function SolarForm() {
             min: 0
           })}
         />
-        {errors.numberOf32mmConduits?.type === "required" && <span>Number required</span>}
-        {errors.numberOf32mmConduits?.type === "min" && <span>Must be 0 or greater</span>}
+        {errors.n32mmConduits?.type === "required" && <span>Number required</span>}
+        {errors.n32mmConduits?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
       
       <div className="col-sm-6">
-        <label htmlFor="numberOfTileDektitesInput">Tile Dektites:</label>
+        <label htmlFor="tileDektitesInput">Tile Dektites:</label>
         <input
           className="form-control"
           type="number"
-          id="numberOfTileDektitesInput"
-          name="numberOfTileDektites"
-          {...register("numberOfTileDektites", {
+          id="tileDektitesInput"
+          name="tileDektites"
+          {...register("tileDektites", {
             required: {
               value: true,
               message: "required",
@@ -377,18 +403,18 @@ function SolarForm() {
             min: 0
           })}
         />
-        {errors.numberOfTileDektites?.type === "required" && <span>Number required</span>}
-        {errors.numberOfTileDektites?.type === "min" && <span>Must be 0 or greater</span>}
+        {errors.tileDektites?.type === "required" && <span>Number required</span>}
+        {errors.tileDektites?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
 
       <div className="col-sm-6">
-        <label htmlFor="numberOfMetalDektitesInput">Metal Dektites:</label>
+        <label htmlFor="metalDektitesInput">Metal Dektites:</label>
         <input
           className="form-control"
           type="number"
-          id="numberOfMetalDektitesInput"
-          name="numberOfMetalDektites"
-          {...register("numberOfMetalDektites", {
+          id="metalDektitesInput"
+          name="metalDektites"
+          {...register("metalDektites", {
             required: {
               value: true,
               message: "required",
@@ -397,18 +423,18 @@ function SolarForm() {
             min: 0
           })}
         />
-        {errors.numberOfMetalDektites?.type === "required" && <span>Number required</span>}
-        {errors.numberOfMetalDektites?.type === "min" && <span>Must be 0 or greater</span>}
+        {errors.metalDektites?.type === "required" && <span>Number required</span>}
+        {errors.metalDektites?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
 
       <div className="col-sm-6">
-        <label htmlFor="numberOfAluminiumSquareDuctInput">Aluminium Square Duct and Lids:</label>
+        <label htmlFor="aluminiumSquareDuctInput">Aluminium Square Duct and Lids:</label>
         <input
           className="form-control"
           type="number"
-          id="numberOfAluminiumSquareDuctInput"
-          name="numberOfAluminiumSquareDuct"
-          {...register("numberOfAluminiumSquareDuct", {
+          id="aluminiumSquareDuctInput"
+          name="aluminiumSquareDuct"
+          {...register("aluminiumSquareDuct", {
             required: {
               value: true,
               message: "required",
@@ -417,11 +443,11 @@ function SolarForm() {
             min: 0
           })}
         />
-        {errors.numberOfAluminiumSquareDuct?.type === "required" && <span>Number required</span>}
-        {errors.numberOfAluminiumSquareDuct?.type === "min" && <span>Must be 0 or greater</span>}
+        {errors.aluminiumSquareDuct?.type === "required" && <span>Number required</span>}
+        {errors.aluminiumSquareDuct?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
 
-      <hr class="my-4"/>
+      <hr className="my-4"/>
       <button 
         className="col-12 w-100 btn btn-primary btn-lg"
         type="submit">
@@ -429,40 +455,30 @@ function SolarForm() {
       </button>
 
       {/* <pre style={{ width: "400px" }}>{JSON.stringify(watch(), null, 2)}</pre> */}
-      
+
+      <hr className="my-4"/>
+
       {Object.keys(picklist).length === 0 ? null : 
-        <div>
-          <h1>Pick List</h1>
-          <ul>
-            {picklist.tileFeet ? <li>{picklist.tileFeet} x Tile Feet</li> : null}
-            {picklist.corrugatedFeet ? <li>{picklist.corrugatedFeet} x Corrugated Feet</li> : null}
-            {picklist.kliplokFeet ? <li>{picklist.kliplokFeet} x Kliplok Feet</li> : null}
-            {picklist.trapezoidalFeet ? <li>{picklist.trapezoidalFeet} x Trapezoidal Feet</li> : null}
-            {picklist.proRails ? <li>{picklist.proRails} x Pro Rails</li> : null}
-            {picklist.tiltRails ? <li>{picklist.tiltRails} x Tilt Rails</li> : null}
-            {picklist.screws ? <li>Screws (both types)</li> : null}
-            {picklist.joiners ? <li>Joiners</li> : null}
-            {picklist.earthStuff ? <li>Earth Stuff</li> : null}
-            {picklist.numberOfPanels ? <li>{picklist.numberOfPanels} x Panels</li> : null}
-            {picklist.midsAndEnds ? <li>Mids and Ends</li> : null}
-            {picklist.midsAndEndsOld ? <li>Mids and Ends (Old)</li> : null}
-            {picklist.qCables ? <li>{picklist.qCables} x Q-cables (portrait)</li> : null}
-            {picklist.isolatorsNormalType ? <li>{picklist.isolatorsNormalType} x Normal Isolators</li> : null}
-            {picklist.isolatorsClearTypeType ? <li>{picklist.isolatorsClearTypeType} x Clear Isolators (Enclosures)</li> : null}
-            {picklist.qRelay ? <li>{picklist.qRelay} x Q-Relay(s)</li> : null}
-            {picklist.c32AmpBreaker ? <li>{picklist.c32AmpBreaker} x 32A Breaker(s)</li> : null}
-            {picklist.envoy ? <li>Envoy</li> : null}
-            {picklist.numberOf25mmConduits ? <li>{picklist.numberOf25mmConduits} x 25mm conduits</li> : null}
-            {picklist.numberOf32mmConduits ? <li>{picklist.numberOf32mmConduits} x 32mm conduits</li> : null}
-            {picklist.numberOfTileDektites ? <li>{picklist.numberOfTileDektites} x Tile Dektites</li> : null}
-            {picklist.numberOfMetalDektites ? <li>{picklist.numberOfMetalDektites} x Metal Dektites</li> : null}
-            {picklist.numberOfAluminiumSquareDuct ? <li>{picklist.numberOfAluminiumSquareDuct} x Aluminium Square Duct and Lids</li> : null}
-
-
+        <div className="col-12">
+          <h4 className="d-flex justify-content-between align-items-center mb-3">
+            <span className="text-primary">Packlist</span>
+          </h4>
+          <ul className="col-12 list-group mb-3">
+            {ITEMS_MAP.map(({key, title}) => {
+              return picklist[key] ? 
+              Number.isInteger(picklist[key]) ? 
+              <li className="list-group-item">{picklist[key]} x {title}</li> : 
+              <li className="list-group-item">{title}</li> : 
+              null
+            })}
           </ul>
         </div>
       }
       </form>
+
+      <footer className="my-5 pt-5 text-body-secondary text-center text-small">
+        <p className="mb-1">© 2023 Minh Tran</p>
+      </footer>
     </div>
   );
 }
