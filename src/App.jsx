@@ -101,13 +101,16 @@ function SolarForm() {
   });
 
   return (
-    <form onSubmit={onSubmit}>
+    <div className='container'>
+      <form className='row g-1' onSubmit={onSubmit}>
 
-      <h4>Panels on Pro Rails</h4>
-      <div>
-        <label># panels on pro rail parallel:</label>
+      <h5 className='col-12 mt-2'>Panels on Pro Rails</h5>
+      <div className='col-12'>
+        <label htmlFor='panelsProRailParallelInput'># panels on pro rail parallel:</label>
         <input
+          className='form-control'
           type="number"
+          id='panelsProRailParallelInput'
           name="panelsProRailParallel"
           {...register("panelsProRailParallel", {
             required: {
@@ -122,10 +125,12 @@ function SolarForm() {
         {errors.panelsProRailParallel?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
 
-      <div>
-        <label># panels on pro rail landscape:</label>
+      <div className='col-12'>
+        <label htmlFor='panelsProRailLandscapeInput'># panels on pro rail landscape:</label>
         <input
+          className='form-control'
           type="number"
+          id='panelsProRailLandscapeInput'
           name="panelsProRailLandscape"
           {...register("panelsProRailLandscape", {
             required: {
@@ -140,11 +145,13 @@ function SolarForm() {
         {errors.panelsProRailLandscape?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
 
-      <h4>Panels on 5 Degree Tilt Rails</h4>
-      <div>
-        <label># panels on tilt rail parallel:</label>
+      <h5 className='col-12 mt-2'>Panels on 5 Degree Tilt Rails</h5>
+      <div className='col-12'>
+        <label htmlFor="panelsTiltRailParallelInput"># panels on tilt rail parallel:</label>
         <input
+          className='form-control'
           type="number"
+          id="panelsTiltRailParallelInput"
           name="panelsTiltRailParallel"
           {...register("panelsTiltRailParallel", {
             required: {
@@ -159,10 +166,12 @@ function SolarForm() {
         {errors.panelsTiltRailParallel?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
 
-      <div>
-        <label># panels on tilt rail landscape:</label>
+      <div className='col-12'>
+        <label htmlFor="panelsTiltRailLandscapeInput"># panels on tilt rail landscape:</label>
         <input
+          className='form-control'
           type="number"
+          id="panelsTiltRailLandscapeInput"
           name="panelsTiltRailLandscape"
           {...register("panelsTiltRailLandscape", {
             required: {
@@ -177,12 +186,14 @@ function SolarForm() {
         {errors.panelsTiltRailLandscape?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
 
-      <h4>Roof Surfaces</h4>
-      <p>N.B. Each panels that are laid in landscape orientation should be itemized as 2 panels</p>
-      <div>
-        <label># panels on tile:</label>
+      <h5 className='col-12 mt-2'>Roof Surfaces</h5>
+      <p className='col-12'>N.B. Each panels that are laid in landscape orientation should be itemized as 2 panels</p>
+      <div className='col-12'>
+        <label htmlFor="panelsOnTileInput"># panels on tile:</label>
         <input
+          className="form-control"
           type="number"
+          id="panelsOnTileInput"
           name="panelsOnTile"
           {...register("panelsOnTile", {
             required: {
@@ -197,10 +208,12 @@ function SolarForm() {
         {errors.panelsOnTile?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
 
-      <div>
-        <label># panels on corrugated:</label>
+      <div className='col-12'>
+        <label htmlFor="panelsOnCorrugatedInput"># panels on corrugated:</label>
         <input
+          className="form-control"
           type="number"
+          id="panelsOnCorrugatedInput"
           name="panelsOnCorrugated"
           {...register("panelsOnCorrugated", {
             required: {
@@ -215,10 +228,12 @@ function SolarForm() {
         {errors.panelsOnCorrugated?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
 
-      <div>
-        <label># panels on kliplok:</label>
+      <div className='col-12'>
+        <label htmlFor="panelsOnKliplokInput"># panels on kliplok:</label>
         <input
+          className="form-control"
           type="number"
+          id="panelsOnKliplokInput"
           name="panelsOnKliplok"
           {...register("panelsOnKliplok", {
             required: {
@@ -233,10 +248,12 @@ function SolarForm() {
         {errors.panelsOnKliplok?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
 
-      <div>
-        <label># panels on trapezoidal:</label>
+      <div className="col-12">
+        <label htmlFor="panelsOnTrapezoidalInput"># panels on trapezoidal:</label>
         <input
+          className="form-control"
           type="number"
+          id="panelsOnTrapezoidalInput"
           name="panelsOnTrapezoidal"
           {...register("panelsOnTrapezoidal", {
             required: {
@@ -251,11 +268,13 @@ function SolarForm() {
         {errors.panelsOnTrapezoidal?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
 
-      <h4>Q-Cables</h4>
-      <div>
-        <label># strings:</label>
+      <h5 className="col-12 mt-2">Q-Cables</h5>
+      <div className="col-sm-6">
+        <label htmlFor="numberOfStringsInput"># strings:</label>
         <input
+          className="form-control"
           type="number"
+          id="numberOfStringsInput"
           name="numberOfStrings"
           {...register("numberOfStrings", {
             required: {
@@ -270,10 +289,12 @@ function SolarForm() {
         {errors.numberOfStrings?.type === "min" && <span>Must be 1 or greater</span>}
       </div>
 
-      <div>
-        <label># approx skipped plugs:</label>
+      <div className="col-sm-6">
+        <label htmlFor="numberOfSkipPlugsInput"># approx skipped plugs:</label>
         <input
+          className="form-control"
           type="number"
+          id="numberOfSkipPlugsInput"
           name="numberOfSkipPlugs"
           {...register("numberOfSkipPlugs", {
             required: {
@@ -288,21 +309,25 @@ function SolarForm() {
         {errors.numberOfSkipPlugs?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
 
-      <div>
+      <div className="col-12">
+        <label htmlFor="isTeslaInput">Is Tesla?</label>
         <input
+          className="form-check-input ms-1"
           type="checkbox"
+          id="isTeslaInput"
           name="isTesla"
           {...register("isTesla", {
           })}
         />
-        <label>Is Tesla?</label>
       </div>
 
-      <h4>Sundries</h4>
-      <div>
-        <label>25mm conduits:</label>
+      <h4 className="col-12 mt-2">Sundries</h4>
+      <div className="col-sm-6">
+        <label htmlFor="numberOf25mmConduitsInput">25mm conduits:</label>
         <input
+          className="form-control"
           type="number"
+          id="numberOf25mmConduitsInput"
           name="numberOf25mmConduits"
           {...register("numberOf25mmConduits", {
             required: {
@@ -316,10 +341,12 @@ function SolarForm() {
         {errors.numberOf25mmConduits?.type === "required" && <span>Number required</span>}
         {errors.numberOf25mmConduits?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
-      <div>
-        <label>32mm conduits:</label>
+      <div className="col-sm-6">
+        <label htmlFor="numberOf32mmConduitsInput">32mm conduits:</label>
         <input
+          className="form-control"
           type="number"
+          id="numberOf32mmConduitsInput"
           name="numberOf32mmConduits"
           {...register("numberOf32mmConduits", {
             required: {
@@ -334,10 +361,12 @@ function SolarForm() {
         {errors.numberOf32mmConduits?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
       
-      <div>
-        <label>Tile Dektites:</label>
+      <div className="col-sm-6">
+        <label htmlFor="numberOfTileDektitesInput">Tile Dektites:</label>
         <input
+          className="form-control"
           type="number"
+          id="numberOfTileDektitesInput"
           name="numberOfTileDektites"
           {...register("numberOfTileDektites", {
             required: {
@@ -352,10 +381,12 @@ function SolarForm() {
         {errors.numberOfTileDektites?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
 
-      <div>
-        <label>Metal Dektites:</label>
+      <div className="col-sm-6">
+        <label htmlFor="numberOfMetalDektitesInput">Metal Dektites:</label>
         <input
+          className="form-control"
           type="number"
+          id="numberOfMetalDektitesInput"
           name="numberOfMetalDektites"
           {...register("numberOfMetalDektites", {
             required: {
@@ -370,10 +401,12 @@ function SolarForm() {
         {errors.numberOfMetalDektites?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
 
-      <div>
-        <label>Aluminium Square Duct and Lids:</label>
+      <div className="col-sm-6">
+        <label htmlFor="numberOfAluminiumSquareDuctInput">Aluminium Square Duct and Lids:</label>
         <input
+          className="form-control"
           type="number"
+          id="numberOfAluminiumSquareDuctInput"
           name="numberOfAluminiumSquareDuct"
           {...register("numberOfAluminiumSquareDuct", {
             required: {
@@ -388,14 +421,16 @@ function SolarForm() {
         {errors.numberOfAluminiumSquareDuct?.type === "min" && <span>Must be 0 or greater</span>}
       </div>
 
-
-
-
-      <button type="submit">Submit</button>
+      <hr class="my-4"/>
+      <button 
+        className="col-12 w-100 btn btn-primary btn-lg"
+        type="submit">
+          Generate Picklist
+      </button>
 
       {/* <pre style={{ width: "400px" }}>{JSON.stringify(watch(), null, 2)}</pre> */}
       
-      {Object.keys(picklist).length === 0 ? <p>hello</p> : 
+      {Object.keys(picklist).length === 0 ? null : 
         <div>
           <h1>Pick List</h1>
           <ul>
@@ -427,7 +462,8 @@ function SolarForm() {
           </ul>
         </div>
       }
-    </form>
+      </form>
+    </div>
   );
 }
 
