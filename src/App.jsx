@@ -14,7 +14,7 @@ function SolarForm() {
     const KLIPLOK_FEET_SPACING = 500;
     const TRAPEZOIDAL_FEET_SPACING = 500;
     const EXTRA_FEET_LEEWAY = 6;
-    const EXTRA_RAIL_LEEWAY = 2;
+    const EXTRA_RAIL_LEEWAY = 4400;
 
     const ITEMS_MAP = [
         {key: "tileFeet", title: "Tile Feet"},
@@ -96,20 +96,27 @@ function SolarForm() {
             c25AmpBreakerSinglePole,
         } = data;
 
+        console.log(Math.ceil((panelsProRailParallel ? panelsProRailParallel * PANEL_WIDTH * 2 / RAIL_LENGTH : 0) +
+            (panelsProRailLandscape ? panelsProRailLandscape * PANEL_HEIGHT * 2 / RAIL_LENGTH : 0) +
+            (numberOfStrings * ISOLATOR_WIDTH / RAIL_LENGTH)));
+
+        console.log(panelsProRailParallel === 0 && panelsProRailLandscape === 0);
         const numberOfPanels = panelsProRailParallel + panelsProRailLandscape + panelsTiltRailParallel + panelsTiltRailLandscape;
         const picklist = {
             tileFeet: panelsOnTile ? Math.ceil((panelsOnTile * PANEL_WIDTH * 2 / TILE_FEET_SPACING + EXTRA_FEET_LEEWAY)) : 0,
             corrugatedFeet: panelsOnCorrugated ? Math.ceil((panelsOnCorrugated * PANEL_WIDTH * 2 / CORRUGATED_FEET_SPACING + EXTRA_FEET_LEEWAY)) : 0,
             kliplokFeet: panelsOnKliplok ? Math.ceil((panelsOnKliplok * PANEL_WIDTH * 2 / KLIPLOK_FEET_SPACING + EXTRA_FEET_LEEWAY)) : 0,
             trapezoidalFeet: panelsOnTrapezoidal ? Math.ceil((panelsOnTrapezoidal * PANEL_WIDTH * 2 / TRAPEZOIDAL_FEET_SPACING + EXTRA_FEET_LEEWAY)) : 0,
-            proRails: panelsProRailParallel === 0 && panelsProRailParallel === 0 ? 0 :
+            proRails: (panelsProRailParallel === 0 && panelsProRailLandscape === 0) ? 0 :
                 Math.ceil((panelsProRailParallel ? panelsProRailParallel * PANEL_WIDTH * 2 / RAIL_LENGTH : 0) +
                     (panelsProRailLandscape ? panelsProRailLandscape * PANEL_HEIGHT * 2 / RAIL_LENGTH : 0) +
-                    (numberOfStrings * ISOLATOR_WIDTH / RAIL_LENGTH)),
-            tiltRails: panelsTiltRailParallel === 0 && panelsTiltRailParallel === 0 ? 0 :
+                    (numberOfStrings * ISOLATOR_WIDTH / RAIL_LENGTH) +
+                    (EXTRA_RAIL_LEEWAY / RAIL_LENGTH)),
+            tiltRails: panelsTiltRailParallel === 0 && panelsTiltRailLandscape === 0 ? 0 :
                 Math.ceil((panelsTiltRailParallel ? panelsTiltRailParallel * PANEL_WIDTH * 2 / RAIL_LENGTH_TILT : 0) +
                     (panelsTiltRailLandscape ? panelsTiltRailLandscape * PANEL_HEIGHT * 2 / RAIL_LENGTH_TILT : 0) +
-                    (numberOfStrings * ISOLATOR_WIDTH / RAIL_LENGTH_TILT)),
+                    (numberOfStrings * ISOLATOR_WIDTH / RAIL_LENGTH_TILT) +
+                    (EXTRA_RAIL_LEEWAY / RAIL_LENGTH)),
             screws: !!(panelsOnTile || panelsOnCorrugated || panelsOnTrapezoidal),
             joiners: true,
             earthStuff: true,
